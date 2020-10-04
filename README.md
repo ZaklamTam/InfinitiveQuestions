@@ -1,7 +1,7 @@
 # InfinitiveQuestions
 This is a simple bash program that guesses the animal (or, actually a general object, depends on how you define an animal) you have in mind, adapted from a course project of CSC209H1.
 It does not doing any prediction, instead it learns from every failure and get the exact answer.
-The idea is somewhat like the decision tree in ML.
+The general idea is somewhat like the decision tree in ML.
 
 ## USAGE ##
 1. run the program with "sh better_animal database"
@@ -20,12 +20,16 @@ The small improvement free the requirement of an exisisting well-structured data
 
 ## BOUNDARIES ##
 As for now it only accepts yes-no questions.
+
 By default, on a fresh start it will ask if your animal have in mind is "Doge".
 
 ## DATABASE ##
 The database follows the (binary) tree structure. Each subdir of a (sub)dir in database will either contains: a file called "name", a file called "question" + a subdir called "yes"/"no" or both of the subdirs.
+
 The "question" file has a yes-no function. (technically it can be any questions, but the program only accepts y/n as answer for now)
+
 The "name" file contains exactly a word/phrase of an animal (or a general object, again, depends on what you'd call an animal)
+
 The sub-directories "yes" and "no" are the decision based on the answers.
 
 ## AUTHORS ##
