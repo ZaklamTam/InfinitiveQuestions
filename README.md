@@ -1,5 +1,5 @@
 # InfinitiveQuestions
-This is a simple bash program that guesses the animal (or, actually a general object, depends on how you define an animal) you have in mind, adapted from a course project of CSC209H1.
+This is a simple shell script that guesses the animal (or, actually a general object, depends on how you define an animal) you have in mind, adapted from a course project of CSC209H1.
 It does not doing any prediction, instead it learns from every failure and get the exact answer.
 The general idea is somewhat like the decision tree in ML.
 
