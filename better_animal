@@ -1,0 +1,87 @@
+set -e
+# test if the input valid and in correct format.
+if test $# -eq 1
+then
+	cd ./$1
+	echo Think of an animal.
+	# keep asking question further until reaching the end of route
+	while :
+	do
+		# ask question or guess the name
+		if test -e question
+		then
+			cat question
+		elif test -e name
+		then
+			echo Is your animal a  `cat name`?
+		# NEW STUFF
+		else
+			echo "Doge" >name
+			continue
+		fi
+
+		if read var
+		then
+			# get the answer
+			# if dir yes exists then dir no exists by default, so only either needs to be checked
+			if test -e question
+			then
+				# go to the corresponding dir
+				if echo $var | grep -Eq '^y(es)?$'
+				then
+					cd yes
+				elif echo $var | grep -Eq '^n(o)?$'
+				then
+					cd no
+				else
+					echo Please answer the question.
+				fi
+			elif test -e name
+			then
+				if echo $var | grep -Eq '^y(es)?$'
+				then
+					echo I got it!
+					exit 0
+				elif echo $var | grep -Eq '^n(o)?$'
+				then
+					# learn the new animal.
+					echo 'Aw, I lose.  What animal were you thinking of?'
+					read ani
+					echo Tell me a question which would distinguish a `cat name` from a "$ani".
+					read question
+					echo What would be the answer for a "$ani"?
+					# it won't get proceed if the answer is in incorrect form (none of y, yes, n or no)
+					while read answer
+					do
+						# create dirs and question for the new animal.
+						if echo $answer | (grep -Eq '^y(es)?$' || grep -Eq '^n(o)?$')
+						then
+							mkdir yes no
+							echo $question >question
+							if echo $answer | grep -Eq '^y(es)?$'
+							then 
+								echo $ani >yes/name
+								mv name no/name
+							else
+								echo $ani >no/name
+								mv name yes/name
+							fi
+							echo "I'll remember that."
+							exit 0
+						else
+							echo Please answer the question.
+						fi
+					done
+				else
+					echo Please answer the question.
+				fi
+			fi
+		else
+			exit 0
+		fi
+	done
+else
+	# usage error message
+	echo usage: $0 database >&2
+fi
+
