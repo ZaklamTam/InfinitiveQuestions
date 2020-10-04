@@ -7,6 +7,8 @@ The idea is somewhat like the decision tree in ML.
 1. run the program with "sh better_animal database"
 2. there you go.
 
+Directory testdb is an example of a standard database. You can pass any directory as a db.
+
 ## FEATURES ##
 Taking the inspration of decision tree in ML, the program guesses the animal user has in mind by asking yes-no questions. Unlike the concept of decision tree, it will make a guess at some point (when the program feel like the given info is clear enough). Once it gets the answer it will exit; otherwise user will be asked for what exactly they have in mind and an extra question (with a key) to identify it, then exit.
 
